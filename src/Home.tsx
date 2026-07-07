@@ -5,12 +5,10 @@ export default function Home() {
   const navigate = useNavigate();
   const { email, logoutUser } = useAuth();
 
-  const handleLogout = () => {
-    logoutUser();
-    navigate("/login");
-  };
-
-  const handleLogin = () => {
+  const handleLoginRedirect = () => {
+    if (email !== "") {
+      logoutUser();
+    }
     navigate("/login");
   };
 
@@ -20,14 +18,14 @@ export default function Home() {
         <>
           LOGGED IN as <strong>{email}</strong>
           <div className="button">
-            <button onClick={handleLogout}>LogOut</button>
+            <button onClick={handleLoginRedirect}>LogOut</button>
           </div>
         </>
       ) : (
         <>
           LOGGED OUT:
           <div className="button">
-            <button onClick={handleLogin}>Login</button>
+            <button onClick={handleLoginRedirect}>Login</button>
           </div>
         </>
       )}
