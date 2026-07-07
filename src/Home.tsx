@@ -10,6 +10,10 @@ export default function Home() {
     navigate("/login");
   };
 
+  const handleLogin = () => {
+    navigate("/login");
+  };
+
   return (
     <div>
       {email ? (
@@ -23,7 +27,7 @@ export default function Home() {
         <>
           LOGGED OUT:
           <div className="button">
-            <button>Login</button>
+            <button onClick={handleLogin}>Login</button>
           </div>
         </>
       )}
