@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./styles.css";
 import { login } from "./utils.tsx";
 import { useAuth } from "./context/useAuth.tsx";
+import { useNavigate } from "react-router";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
@@ -10,17 +11,25 @@ export default function LoginForm() {
   const [error, setError] = useState("");
 
   const { loginUser } = useAuth();
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     setError("");
     setLoading(true);
+
     try {
       await login({ email, password });
-      loginUser({ email, user: "myUser" });
+      loginUser({ email, user: "testUser" });
       alert("Login Successful");
+      navigate("/");
+
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      setError(error.message);
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError("Something went wrong");
+      }
     } finally {
       setLoading(false);
     }
