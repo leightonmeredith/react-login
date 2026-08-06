@@ -5,15 +5,19 @@ import App from './App.tsx'
 import { createBrowserRouter, RouterProvider } from "react-router";
 import Home from "./Home.tsx";
 import LoginForm from "./LoginForm.tsx";
-import { AuthProvider } from "./context/AuthProvider.tsx";
+import { AuthProvider } from "./context/authProvider.tsx";
+import ErrorPage from "./ErrorPage.tsx";
+import Teams from "./Teams.tsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     children: [
-      { path: "", element: <Home /> },
-      { path: "login", element: <LoginForm /> },
+      { path: "", element: <Home />, errorElement: <ErrorPage /> },
+      { path: "teams", element: <Teams />, errorElement: <ErrorPage /> },
+      { path: "login", element: <LoginForm />, errorElement: <ErrorPage /> },
+      { path: "test", element: <ErrorPage /> },
     ],
   },
 ]);

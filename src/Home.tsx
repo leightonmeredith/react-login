@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useAuth } from "./context/useAuth";
 
 export default function Home() {
@@ -20,6 +20,7 @@ export default function Home() {
           <div className="button">
             <button onClick={handleLoginRedirect}>LogOut</button>
           </div>
+          <Link to="/teams">Go to Teams</Link>
         </>
       ) : (
         <>
