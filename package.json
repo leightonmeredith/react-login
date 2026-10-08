@@ -1,13 +1,25 @@
 {
-  "name": "react-login",
+  "name": "@island-stars/react-login",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.2.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "build:lib": "vite build --config vite.lib.config.ts"
+  },
+  "files": [
+    "dist",
+    "types"
+  ],
+  "exports": {
+    ".": {
+      "types": "./types/angular.d.ts",
+      "import": "./dist/react-login.js"
+    },
+    "./style.css": "./dist/react-login.css"
   },
   "dependencies": {
     "react": "^19.2.7",

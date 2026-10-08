@@ -4,7 +4,11 @@ import { login } from "./utils.tsx";
 import { useAuth } from "./context/useAuth.tsx";
 import { useNavigate } from "react-router";
 
-export default function LoginForm() {
+interface LoginFormProps {
+  onLoginSuccess?: () => void;
+}
+
+export default function LoginForm({ onLoginSuccess }: LoginFormProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -21,7 +25,11 @@ export default function LoginForm() {
       await login({ email, password });
       loginUser({ email, user: "testUser" });
       alert("Login Successful");
-      navigate("/");
+      if (onLoginSuccess) {
+        onLoginSuccess();
+      } else {
+        navigate("/");
+      }
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
