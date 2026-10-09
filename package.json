@@ -1,14 +1,17 @@
 {
   "name": "@island-stars/react-login",
   "private": true,
-  "version": "1.2.1",
+  "version": "1.2.2",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "build:lib": "vite build --config vite.lib.config.ts"
+    "build:lib": "vite build --config vite.lib.config.ts",
+    "clean:pack": "node -e \"const fs=require('node:fs'); for(const f of fs.readdirSync('.')) { if(/^island-stars-react-login-.*\\.tgz$/.test(f)) fs.unlinkSync(f); }\"",
+    "pack:lib": "npm run clean:pack && npm run build:lib && npm pack",
+    "pack:release": "npm run clean:pack && npm run build:lib && npm version patch --no-git-tag-version && npm pack"
   },
   "files": [
     "dist",
